@@ -1,5 +1,6 @@
 package com.deepaks.boot.spock.resources
 
+import com.deepaks.boot.spock.resources.utils.UnitTestUtils
 import spock.lang.Specification;
 
 class PrimeServiceImplSpec extends Specification {
@@ -29,5 +30,20 @@ class PrimeServiceImplSpec extends Specification {
         then:
         def e = thrown(IllegalArgumentException)
         e.message == 'argument must not be negative'
+    }
+
+    void "my test"() {
+        given:
+        Person person
+        when:
+        println 'person value ' + givenA + ", class: " + givenA.getClass()
+        person = UnitTestUtils.createTestPerson(givenA)
+        then:
+        person.name == expected.name
+        person.age == expected.age
+        where:
+        id| givenA        | expected
+        1 | [name: "Joe"] | [name: "Joe", age: 45]
+        2 | [age: 5]      | [name: "Jim Bob", age: 5]
     }
 }

@@ -1,15 +1,12 @@
 package com.deepaks.boot.spock.resources
 
+import com.deepaks.boot.spock.DemoApplication
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.IntegrationTest
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
-
-import com.deepaks.boot.spock.DemoApplication;
-
 import spock.lang.Specification
-
 
 @ContextConfiguration(loader = SpringApplicationContextLoader, classes = DemoApplication)
 @WebAppConfiguration
@@ -24,7 +21,7 @@ class PrimeSpec extends Specification {
         "http://localhost:$port/prime?n=$n"
             .toURL().text == response
         println response
- 
+
         where:
         n  | response
         23 | 'prime'
